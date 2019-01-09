@@ -2,6 +2,11 @@ module Impl where
 
 import Lib
 
+-- Remember that [a] is syntactic sugar for List a.
+-- data [a] = [] | a : [a]
+-- which is like
+-- data List a = Nil | Cons a (List a)
+
 listToMaybe :: [a] -> Maybe a
 listToMaybe = incomplete
 
