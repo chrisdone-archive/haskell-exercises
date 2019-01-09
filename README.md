@@ -69,3 +69,18 @@ There is 1 failure. The test suite tells you what input failed:
              [0]
 
 So that helps you to go back to your code and consider the case `[0]`.
+
+When you get your implementation right, you'll see:
+
+    Basics
+      Head of a list
+        +++ OK, passed 100 tests.
+      Sum a list
+        # PENDING: incomplete
+      Reverse a list
+        # PENDING: incomplete
+
+    Finished in 0.0005 seconds
+    3 examples, 0 failures, 2 pending
+
+Good luck!
