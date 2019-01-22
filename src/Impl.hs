@@ -1,6 +1,7 @@
 module Impl where
 
 import Lib
+import Prelude hiding (sum, reverse, foldr, foldl)
 
 -- Remember that [a] is syntactic sugar for List a.
 -- data [a] = [] | a : [a]
