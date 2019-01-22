@@ -45,6 +45,9 @@ lists = do
     "Left-fold: reverse"
     Impl.foldl
     (property (\xs -> Impl.foldl (flip (:)) [] xs == foldl (flip (:)) [] (xs :: [Integer])))
+  it' "addMaybes"
+      Impl.addMaybes
+      (property (\x y -> Impl.addMaybes x y == ((+) <$> x <*> y)))
 
 it' :: (Example a1, Arg a1 ~ ()) => String -> a2 -> a1 -> SpecM () ()
 it' title f inner = do

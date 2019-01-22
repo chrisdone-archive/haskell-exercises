@@ -22,3 +22,6 @@ foldr = incomplete
 
 foldl :: (acc -> e -> acc) -> acc -> [e] -> acc
 foldl = incomplete
+
+addMaybes :: Maybe Int -> Maybe Int -> Maybe Int
+addMaybes = incomplete
