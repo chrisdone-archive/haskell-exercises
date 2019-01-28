@@ -1,9 +1,11 @@
 module Impl where
 
+import           Data.List
+import           Data.Map.Strict (Map)
 import           Data.Map.Strict (Map)
 import qualified Data.Map.Strict as M
-import           Data.Vector (Vector)
-import qualified Data.Vector as V
+import           Data.Set (Set)
+import qualified Data.Set as Set
 import           Lib
 import           Prelude hiding (sum, reverse, foldr, foldl)
 
@@ -35,3 +37,9 @@ mapFromList = incomplete
 
 histogram :: Ord k => [k] -> Map k Int
 histogram = incomplete
+
+setFromList :: Ord k => [k] -> Set k
+setFromList = incomplete
+
+unique :: Ord k => [k] -> [k]
+unique = incomplete

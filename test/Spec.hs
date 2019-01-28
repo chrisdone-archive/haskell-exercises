@@ -2,6 +2,8 @@
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE ScopedTypeVariables #-}
 {-# LANGUAGE BangPatterns #-}
+import qualified Data.Set as Set
+import           Data.Set (Set)
 import           Data.List
 import qualified Data.Map.Strict as M
 import           Data.Map.Strict (Map)
@@ -24,7 +26,19 @@ basics =
   describe
     "Basics"
     (do describe "Lists" lists
-        describe "Maps" maps)
+        describe "Maps" maps
+        describe "Sets" sets)
+
+sets :: SpecM () ()
+sets = do
+  it'
+    "From list"
+    (Impl.setFromList :: [Int] -> Set Int)
+    (property (\xs -> Impl.setFromList xs == Set.fromList (xs :: [Int])))
+  it'
+    "Unique function"
+    (Impl.unique :: [Int] -> [Int])
+    (property (\xs -> Impl.unique xs == Set.toList (Set.fromList (xs :: [Int]))))
 
 maps :: SpecM () ()
 maps = do
@@ -34,7 +48,7 @@ maps = do
     (property (\xs -> Impl.mapFromList xs == M.fromList (xs :: [(Int, Int)])))
   it'
     "Histogram"
-    (Impl.mapFromList :: [(Int, v)] -> Map Int v)
+    (Impl.histogram :: [Int] -> Map Int Int)
     (property
        (\xs ->
           Impl.histogram xs ==
