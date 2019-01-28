@@ -2,11 +2,14 @@
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE ScopedTypeVariables #-}
 {-# LANGUAGE BangPatterns #-}
+import           Data.List
+import qualified Data.Map.Strict as M
+import           Data.Map.Strict (Map)
 import           Control.Exception
 import           Lib
 import           Data.Maybe
 import qualified Impl
-import Test.Hspec.Core.Spec
+import           Test.Hspec.Core.Spec
 import           Test.Hspec
 import           Test.QuickCheck
 
@@ -17,7 +20,25 @@ spec :: SpecWith ()
 spec = do basics
 
 basics :: SpecWith ()
-basics = describe "Basics" (describe "Lists" lists)
+basics =
+  describe
+    "Basics"
+    (do describe "Lists" lists
+        describe "Maps" maps)
+
+maps :: SpecM () ()
+maps = do
+  it'
+    "From list"
+    (Impl.mapFromList :: [(Int, v)] -> Map Int v)
+    (property (\xs -> Impl.mapFromList xs == M.fromList (xs :: [(Int, Int)])))
+  it'
+    "Histogram"
+    (Impl.mapFromList :: [(Int, v)] -> Map Int v)
+    (property
+       (\xs ->
+          Impl.histogram xs ==
+          foldl' (\m i -> M.insertWith (+) i 1 m) mempty (xs :: [Int])))
 
 lists :: SpecM () ()
 lists = do

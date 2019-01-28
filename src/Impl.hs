@@ -1,7 +1,11 @@
 module Impl where
 
-import Lib
-import Prelude hiding (sum, reverse, foldr, foldl)
+import           Data.Map.Strict (Map)
+import qualified Data.Map.Strict as M
+import           Data.Vector (Vector)
+import qualified Data.Vector as V
+import           Lib
+import           Prelude hiding (sum, reverse, foldr, foldl)
 
 -- Remember that [a] is syntactic sugar for List a.
 -- data [a] = [] | a : [a]
@@ -25,3 +29,9 @@ foldl = incomplete
 
 addMaybes :: Maybe Int -> Maybe Int -> Maybe Int
 addMaybes = incomplete
+
+mapFromList :: Ord k => [(k,v)] -> Map k v
+mapFromList = incomplete
+
+histogram :: Ord k => [k] -> Map k Int
+histogram = incomplete
