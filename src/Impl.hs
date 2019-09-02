@@ -43,3 +43,6 @@ setFromList = incomplete
 
 unique :: Ord k => [k] -> [k]
 unique = incomplete
+
+qsort :: Ord a => [a] -> [a]
+qsort = incomplete

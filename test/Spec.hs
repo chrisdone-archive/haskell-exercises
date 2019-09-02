@@ -1,4 +1,5 @@
 {-# LANGUAGE GADTs #-}
+{-# LANGUAGE TypeApplications #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE ScopedTypeVariables #-}
 {-# LANGUAGE BangPatterns #-}
@@ -57,6 +58,10 @@ maps = do
 lists :: SpecM () ()
 lists = do
   it'
+    "Sort"
+    (Impl.qsort @Int)
+    (property (\xs -> Impl.qsort xs == sort (xs :: [Int])))
+  it'
     "Head of a list"
     Impl.listToMaybe
     (property (\xs -> Impl.listToMaybe xs == listToMaybe (xs :: [Integer])))
@@ -79,10 +84,13 @@ lists = do
   it'
     "Left-fold: reverse"
     Impl.foldl
-    (property (\xs -> Impl.foldl (flip (:)) [] xs == foldl (flip (:)) [] (xs :: [Integer])))
-  it' "addMaybes"
-      Impl.addMaybes
-      (property (\x y -> Impl.addMaybes x y == ((+) <$> x <*> y)))
+    (property
+       (\xs ->
+          Impl.foldl (flip (:)) [] xs == foldl (flip (:)) [] (xs :: [Integer])))
+  it'
+    "addMaybes"
+    Impl.addMaybes
+    (property (\x y -> Impl.addMaybes x y == ((+) <$> x <*> y)))
 
 it' :: (Example a1, Arg a1 ~ ()) => String -> a2 -> a1 -> SpecM () ()
 it' title f inner = do
